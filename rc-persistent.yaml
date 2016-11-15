@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: mycontroller-persistent
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        type: echo-persistent
+    spec:
+      containers:
+        - name: mypod
+          image: lulf/openshift-echo:latest
+          ports:
+            - name: echo
+              containerPort: 2000
+          volumeMounts:
+            - name: myvol
+              mountPath: /var/disk
+      volumes:
+        - name: myvol
+          persistentVolumeClaim:
+            claimName: mypvc
