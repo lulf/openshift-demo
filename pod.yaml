@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: mypod
   labels:
-    category: silly
+    type: echo
 spec:
   containers:
     - name: mypod
