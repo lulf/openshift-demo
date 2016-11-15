@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  name: mybuild
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: myapp:latest
+  source:
+    git:
+      uri: https://github.com/lulf/os-sample-python.git
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: python:3.5
+        namespace: openshift
+    type: Source
+  triggers:
+  - type: ImageChange
+  - type: ConfigChange
+
