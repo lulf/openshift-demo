@@ -6,7 +6,7 @@ metadata:
     type: echo
 spec:
   containers:
-    - name: mypod
+    - name: mycontainer
       image: lulf/openshift-echo:latest
       ports:
         - name: echo

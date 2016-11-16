@@ -6,16 +6,6 @@ metadata:
   name: myapp
 spec:
   replicas: 1
-  selector:
-    app: myapp
-  strategy:
-    rollingParams:
-      intervalSeconds: 1
-      maxSurge: 25%
-      maxUnavailable: 25%
-      timeoutSeconds: 600
-      updatePeriodSeconds: 1
-    type: Rolling
   template:
     metadata:
       labels:
@@ -28,10 +18,21 @@ spec:
           ports:
           - containerPort: 8080
             protocol: TCP
+  selector:
+    app: myapp
+  strategy:
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
   triggers:
   - type: ConfigChange
   - type: ImageChange
     imageChangeParams:
+      automatic: true
       containerNames:
       - myapp
       from:
